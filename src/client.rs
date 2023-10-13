@@ -9,7 +9,7 @@ pub mod template {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let mut client = TemplateClient::connect("http://0.0.0.0:50051").await?;
+    let mut client = TemplateClient::connect("http://localhost:50051").await?;
 
     let request = tonic::Request::new(TemplateRequest {
         name: "Tonic".into(),
