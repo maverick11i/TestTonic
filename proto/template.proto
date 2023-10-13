@@ -1,0 +1,14 @@
+syntax = "proto3";
+package template;
+
+service Template {
+    rpc SayHello (TemplateRequest) returns (TemplateResponse);
+}
+
+message TemplateRequest {
+   string name = 1;
+}
+
+message TemplateResponse {
+    string message = 1;
+}
