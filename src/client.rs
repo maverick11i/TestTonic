@@ -11,19 +11,26 @@ pub mod template {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut client = TemplateClient::connect("http://localhost:50051").await?;
 
-    let request = tonic::Request::new(TemplateRequest {
-        name: "Tonic".into(),
-    });
-    let start_time = Instant::now();
+    for i in 0..100000 {
+        let start_time = Instant::now();
 
-    let response = client.say_hello(request).await?;
+        let request = tonic::Request::new(TemplateRequest {
+            name: "Tonic".into(),
+        });
 
-    let end_time = Instant::now();
-    let elapsed_time = end_time - start_time;
+        let mut response = client.say_hello(request).await?;
 
-    println!("処理にかかった時間: {:?}", elapsed_time);
+        let end_time = Instant::now();
+        let elapsed_time = end_time - start_time;
 
-    println!("RESPONSE={:?}", response);
+        println!(
+            "RESPONSE COUNT: {:?} RESPONSE TIME: {:?}",
+            i + 1,
+            elapsed_time
+        );
+
+        println!("RESPONSE={:?}", response.get_mut().message);
+    }
 
     Ok(())
 }

@@ -2,7 +2,7 @@ use std::env;
 use tonic::transport::Server;
 
 use crate::usecases::config::proto::template::template_server::TemplateServer;
-use crate::usecases::handler::template::TemplateHandler;
+use crate::usecases::handlers::template::TemplateHandler;
 
 pub async fn run() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
